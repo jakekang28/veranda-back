@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -5,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/home/login.css">
-    <script src = "/js/home/login.js" defer></script>
+    <script src = "/js/home/register.js" defer></script>
     <title>Document</title>
 </head>
 <body>
@@ -13,9 +14,11 @@
         <div class="form">
           <form class="login-form">
             <input id = "id" type = "text" placeholder="아이디"/>
+            <input id = "name" type = "text" placeholder = "이름"/>
             <input id = "pwd" type="password" placeholder="비밀번호"/>
-            <p id = "button">로그인</p>
-            <p class="message">Not registered? <a href="/register">Create an account</a></p>
+            <input id = "confirm-pwd" type="password" placeholder="비밀번호 확인"/>
+            <p id = "button"> 회원가입 </p>
+            <p class="message">Already registered? <a href="/login">Login</a></p>
           </form>
         </div>
       </div>
