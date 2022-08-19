@@ -2,7 +2,7 @@
     "name": "032c",
     "version": "1.0.0",
     "scripts": {
-        "start" : "node ./bin/www.js",
+        "start": "node ./bin/www.js",
         "client": "cd client && yarn start",
         "server": "nodemon server.js",
         "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
@@ -10,7 +10,8 @@
     "dependencies": {
         "body-parser": "^1.20.0",
         "ejs": "^3.1.8",
-        "express": "^4.18.1"
+        "express": "^4.18.1",
+        "mysql": "^2.18.1"
     },
     "devDependencies": {
         "concurrently": "^4.0.1"
