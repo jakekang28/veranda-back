@@ -26,7 +26,6 @@ const process = {
         return res.json(response);
     }
 };
-
 module.exports = {
     output,
     process
