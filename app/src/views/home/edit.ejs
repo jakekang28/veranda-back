@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Edit Article</title>
+</head>
+<body>
+  <h1>Edit Article</h1>
+  <hr/>
+  <form method="post">
+    <fieldset>
+      <legend>Edit Article</legend>
+      <table>
+        <tr>
+          <td><label>Id</label></td>
+          <td><input type="text" name="id" value="<%= data.id %>" disabled /></td>
+        </tr>
+        <tr>
+          <td><label>Title</label></td>
+          <td><input type="text" name="title" value="<%= data.title %>" /></td>
+        </tr>
+        <tr>
+          <td><label>Article</label></td>
+          <td><input type="text" name="article" value="<%= data.article %>" /></td>
+        </tr>
+      </table>
+      <input type="submit" value="Submit!" />
+    </fieldset>
+  </form>
+</body>
+</html>

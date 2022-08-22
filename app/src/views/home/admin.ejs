@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>List Page</title>
+</head>
+<body>
+  <h1>Article List</h1>
+  <a href="articles/insert">Add Article</a>
+  <hr/>
+  <table border="1">
+    <tr>
+      <th>DELETE</th>
+      <th>EDIT</th>
+      <th>id</th>
+      <th>Title</th>
+      <th>Article</th>
+    </tr>
+    <% data.forEach(function (item, index) { %>
+    <tr>
+      <td><a href="/articles/delete/<%= item.id%>">DELETE</a></td>
+      <td><a href="/articles/edit/<%= item.id %>">EDIT</a></td>
+      <td><%= item.id %></td>
+      <td><%= item.title %></td>
+      <td><%= item.article %></td>
+    </tr>
+    <% }); %>
+  </table>
+</body>
+</html>
