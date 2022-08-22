@@ -9,21 +9,38 @@ const output = {
             if(err) {
                 res.send(err)
             } else {
-                res.send(results)
+                res.send(results);
             }
         })    
         })        
     },
     insert : (req, res) => {
-        fs.readFile('../../views/home/insert.html','utf8',function(err, data) {
-            res.send(data);
+        db.query('SELECT * FROM article;',function(err, data,fields){
+            if(err){
+                console.log(err);
+                res.status(500).send('Internal Server Error');
+            } else {
+                res.render('home/insert',{articles : data});
+            }
         })
     },
     edit : (req, res) => {
-        fs.readFile('edit.ejs','utf8',function (err, data) {
-            db.query('SELECT * FROM article WHERE id = ?',[req.params.id],function(err,result){
-                res.send(result);
-            })
+        db.query('SELECT * FROM article;',function(err, data,fields){
+            var id = req.params.id;
+            if(id){
+                db.query('SELECT * FROM article WHERE id = ?;',[id],function(err,data,fields){
+                    if(err){
+                        console.log(err);
+                        res.status(500).send('Internal Server Error');
+                    } else {
+                        res.render('home/edit');
+                    }
+                })
+            }
+            else {
+                console.log(err);
+                res.status(500).send("Internal Server Error");
+            }
         })
     }
 }
@@ -35,12 +52,18 @@ const manipulate = {
     },
     insert : (req, res) => {
         const body = req.body;
-        db.query("INSERT INTO article (id, title, article) values (?, ?, ?);",[
-            body.id,
-            body.title,
-            body.article
-        ], function() {
-            res.redirect('/articles')
+        var title = body.title;
+        var description = body.article;
+        db.query("INSERT INTO article (title, article) values (?, ?);",[
+            title,
+            description
+        ], function(err, row, fields) {
+            if(err) {
+                console.log(err);
+                res.status(500).send('Internal Server Error');
+            } else {
+                res.redirect('/articles')
+            }
         })
     },
     edit : (req, res) => {
