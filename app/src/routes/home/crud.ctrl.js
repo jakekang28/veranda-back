@@ -1,4 +1,19 @@
 "use strict";
+
+const multer = require("multer");
+const path = require("path");
+
+var storage = multer.diskStorage({
+    destination : function (req, file, cb) {
+        cb(null, "public/images");
+    },
+    filename : function(req, file, cb) {
+        const ext = path.extname(file.originalname);
+        cb(null, path.basename(file.originalname, ext) = "-" + Date.now() + ext);
+    },
+});
+var upload = multer({ storage : storage});
+
 const fs = require('fs');
 const db = require('../../config/db.js');
 const ejs = require('ejs');
@@ -9,10 +24,15 @@ const output = {
             if(err) {
                 res.send(err)
             } else {
-                res.send(results);
+                res.render('home/admin',{data : results})
             }
         })    
         })        
+    },
+    delete : (req, res) => {
+        db.query('DELETE FROM article WHERE id = ?',[req.params.id],function(){
+            res.redirect('/articles')
+        })
     },
     insert : (req, res) => {
         db.query('SELECT * FROM article;',function(err, data,fields){
@@ -20,12 +40,12 @@ const output = {
                 console.log(err);
                 res.status(500).send('Internal Server Error');
             } else {
-                res.render('home/insert',{articles : data});
+                res.render('home/insert',{data : data[0]});
             }
         })
     },
     edit : (req, res) => {
-        db.query('SELECT * FROM article;',function(err, data,fields){
+        db.query('SELECT * FROM article;',function(err, results){
             var id = req.params.id;
             if(id){
                 db.query('SELECT * FROM article WHERE id = ?;',[id],function(err,data,fields){
@@ -33,7 +53,7 @@ const output = {
                         console.log(err);
                         res.status(500).send('Internal Server Error');
                     } else {
-                        res.render('home/edit');
+                        res.render('home/edit',{data : results});
                     }
                 })
             }
@@ -45,18 +65,16 @@ const output = {
     }
 }
 const manipulate = {
-    delete : (req, res) => {
-        db.query('DELETE FROM article WHERE id = ?',[req.params.id], function (){
-            res.redirect('/articles');
-        })  
-    },
+    
     insert : (req, res) => {
         const body = req.body;
         var title = body.title;
         var description = body.article;
-        db.query("INSERT INTO article (title, article) values (?, ?);",[
+        const image = `images/${req.body.image}`;
+        db.query("INSERT INTO article (title, article, image) values (?, ?, ?);",[
             title,
-            description
+            description,
+            image
         ], function(err, row, fields) {
             if(err) {
                 console.log(err);
