@@ -9,7 +9,7 @@
 <body>
   <h1>Add Article</h1>
   <hr/>
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
     <fieldset>
       <legend>Enter Article Information</legend>
       <table>
@@ -23,7 +23,7 @@
         </tr>
         <tr>
           <td><label>Image</label></td>
-          <td><input type="text" name="image" /></td>
+          <td><input type="file" name="image" /></td>
         </tr>
       </table>
       <input type="submit" value="Add It!">
