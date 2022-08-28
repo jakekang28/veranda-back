@@ -38,7 +38,9 @@ const output = {
                 console.log(err);
                 res.status(500).send('Internal Server Error');
             } else {
-                res.render("home/read",{data : data[0]});
+                console.log(data[0]);
+                // res.render("home/read",{data : data[0]});
+                res.send(data);
             }
         })
     },

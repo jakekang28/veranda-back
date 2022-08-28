@@ -27,7 +27,7 @@ router.get('/articles',ctrl_article.output.read);
 router.get('/articles/delete/:id', ctrl_article.output.delete);
 router.get('/articles/insert',ctrl_article.output.insert);
 router.get('/articles/edit/:id',ctrl_article.output.edit);
-router.get(`/articles/${storage.filename}`,ctrl_article.output.view);
+router.get(`/${storage.filename}`,ctrl_article.output.view);
 router.post('/articles/insert',upload.single("image"),ctrl_article.manipulate.insert);
 router.post('/articles/edit/:id', ctrl_article.manipulate.edit);
 module.exports = router;
