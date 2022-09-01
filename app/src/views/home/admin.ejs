@@ -26,7 +26,7 @@
       <td><%= item.id %></td>
       <td><%= item.title %></td>
       <td><%= item.article %></td>
-      <td><a href="/articles/app/<%= item.image%>">VIEW</a></td>
+      <td><a href="/articles/view/<%=item.id%>">VIEW</a></td>
     </tr>
     <% }); %>
   </table>
