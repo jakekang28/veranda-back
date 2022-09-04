@@ -70,7 +70,12 @@ const manipulate = {
                 res.status(500).send('Internal Server Error');
             } else {
                 console.log("rows " + JSON.stringify(row));
-                res.redirect('/articles')
+                res.send({
+                    title: title,
+                    article: content,
+                    path: thumbnail,
+                    id: row.insertId
+                })
             }
         })
     },
